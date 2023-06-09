@@ -9,23 +9,53 @@
 using namespace std;
 
 int main() {
-	ofstream myFile;
-	int sum, count;
+	setlocale(LC_ALL, "RUS");
+	string nameFile = "testing.txt";
+	int input; 
+	int digit = 0; 
+	char ch;
+	int sum = 0, count = -1;
+	ofstream fout;
+	bool flag = true;
+	 
+	fout.open(nameFile); 
+
+	if (!fout.is_open()) {
+		cout << "ERROR" << endl;
+	}
+	else {
+		cout << "Введите данные файла типа int - введите 0, чтобы закончить: ";
+		while (flag) { 
+			cin >> input; 
+			flag = input != 0;  
+			fout << " ";
+			fout << input; 
 	
-	myFile.open("testing.txt");
-	if (myFile.is_open())
-	{
-		int digit;
-		while (myFile.eof())
-		{
-			cout << "soijsh" << endl;
 		}
 
-
-
-		myFile.close();
+		fout.close();
 	}
 
+	ifstream fin;
+
+	fin.open(nameFile); 
+
+
+	if (!fin.is_open()) {
+		cout << "ERROR" << endl;
+	}
+	else {
+		while (fin.get(ch)) {
+			count++;
+			sum += digit;
+			fin >> digit;
+		}
+	}
+
+	fin.close();
+
+	cout << "Кол-во чисел: " << count << endl;
+	cout << "Сумма чисел: " << sum << endl;
 
 	return 0;
 }
